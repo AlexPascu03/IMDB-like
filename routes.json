@@ -1,0 +1,5 @@
+{
+  "/api/*": "/$1",
+  "/movies": "/movies?_page=1",
+  "/movies?_page=:page": "/movies?_page=:page&_limit=20"
+}

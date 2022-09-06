@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/main.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>moviesHUB</title>
+  </head>
+  <body>
+    <div class="nav"><div class="title-w">
+    <div onclick="homePage()" class="title">movies</div><div onclick="homePage()" class="hub">HUB</div></div>
+    
+    <div class="search">
+    <input type="text" class="search-bar" placeholder="Search for movies...">
+    <ul class="suggestions">
+      <!-- <li>Filter for a movie</li> -->
+    </ul>
+</div>
+    <Div>
+      <button  class="add_button" type="button" onclick="random()">What to watch?</button>
+      <button  class="add_button" type="button" onclick="moveToAddMovie()">Add movie</button>
+    </Div>
+  </div>
+    <div  id="app"></div>
+    <div data-pagination>
+      <a data-prev href="">&lt; Prev</a>
+      <a href="?page=1">1</a>
+      <div data-pagination-dynamic></div>
+      <a href="?page=50">50</a>
+      <a data-next href="">Next &gt;</a>
+    </div>  
+  </body>
+</html>

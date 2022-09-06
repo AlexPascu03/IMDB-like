@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/form.css">
+    <script src="scripts/addMovie.js" defer></script>
+
+    <title>Add a new movie</title>
+  </head>
+  <body><div class="nav">
+    <div onclick="homePage()" class="title-w">
+      <div class="title">movies</div><div class="hub">HUB</div></div>
+    <h1>Add movie</h1>
+    <form data-add-form class="add-form">
+      <label>Title
+      <input class="form-item" type="text" placeholder="Title" name="title" data-title-input required />
+    </label>
+    <label>URL:
+      <input class="form-item" type="text" placeholder="Poster URL" name="poster" data-poster-input required/>
+    </label>
+    <label>Year:
+      <input class="form-item" type="text" placeholder="Year" name="year" data-year-input required/>
+    </label>
+    <label>Director:
+      <input class="form-item" type="text" placeholder="Director" name="director" data-director-input required/>
+    </label>
+    <label>Actors:
+      <input class="form-item" type="text" placeholder="Actors" name="actors" data-actors-input required/>
+    </label>
+    <div>
+      <label>IMDB rating: <span id="liveValue"></span></label>
+  
+      <input class="form-item" type="range" step="0.1" min="0" max="10" id="rateRange" oninput="displayRate(rateRange.value)" name="range" value="${data.imdbrating}" data-rating-input required/>
+      
+      </div>
+      <label for="cars">Choose a genre:</label>
+      <select data-genre-select>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Horror">Horror</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Thriller">Thriller</option>
+      </select>
+    </label>
+    <label>Plot:</label>
+      <textarea class="form-item" name="plot" id="" placeholder="Plot" cols="30"  rows="10" name="plot" data-plot-input required></textarea>
+    
+      <button class="add-movie" >Add movie</button>
+
+    </form>
+  </body>
+</html>

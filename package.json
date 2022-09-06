@@ -1,0 +1,10 @@
+{
+  "name": "template-homework-ajax",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "json-server db.json --routes routes.json"
+  },
+  "keywords": [],
+  "author": "Paul Negoescu",
+  "license": "MIT"
+}
