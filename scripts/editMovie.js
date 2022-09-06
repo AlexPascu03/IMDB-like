@@ -1,25 +1,22 @@
 'use strict';
 
-
-
 const params = new URLSearchParams(location.search);
 const movieId = params.get('movieId');
 
 function fetchData() {
   fetch(`http://localhost:3000/movies/${movieId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw Error('ERROR');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
 
-  .then(response =>{ 
-    if(!response.ok) {
-      throw Error("ERROR")
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    
-    document.title = `${data.title} - Edit`;
+      document.title = `${data.title} - Edit`;
 
-    const detailsPage = `
+      const detailsPage = `
     <h1>Edit movie</h1>
   <form data-add-form class="add-form">
     <label>Title
@@ -69,24 +66,19 @@ function fetchData() {
     <textarea  class="form-item" name="plot" id="" placeholder="Plot" cols="30" rows="10" name="plot"  data-plot-input required>"${data.plot}"</textarea>
   </form>
 
-    `
-    
-    document
-    .querySelector('#app').insertAdjacentHTML("afterbegin", detailsPage)
+    `;
 
-    
-    
-  }).catch(error => {
-    console.log(error)
-  })
-
-
-
+      document
+        .querySelector('#app')
+        .insertAdjacentHTML('afterbegin', detailsPage);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
-fetchData()
+fetchData();
 
-function editData(){
-  
+function editData() {
   const title = document.querySelector('[data-title-input]').value;
   const poster = document.querySelector('[data-poster-input]').value;
   const year = document.querySelector('[data-year-input]').value;
@@ -96,43 +88,39 @@ function editData(){
   const director = document.querySelector('[data-director-input]').value;
   const actors = document.querySelector('[data-actors-input]').value;
 
-
-  fetch(`http://localhost:3000/movies/${movieId}`,{
-  method: 'PUT',
-  headers: {
-    'Content-type': 'application/json',
-  },
-  body: JSON.stringify({
-    
-    title,
-    year,
-    poster,
-    genre,
-    imdbrating,
-    director,
-    plot,
-    actors,
-  })
-  }).then(response =>{ 
-    if(!response.ok) {
-      throw Error("ERROR")
+  fetch(`http://localhost:3000/movies/${movieId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      year,
+      poster,
+      genre,
+      imdbrating,
+      director,
+      plot,
+      actors,
+    }),
+  }).then((response) => {
+    if (!response.ok) {
+      throw Error('ERROR');
     }
     return response.json();
-  })
-  window.location="index.html"
-
+  });
+  window.location = 'index.html';
 }
 
-
 function homePage() {
-  window.location = "index.html"
+  window.location = 'index.html';
 }
 
 function liveRange() {
-  var range = document.getElementById("rateRange").defaultValue;
-  document.getElementById("liveValue").innerHTML = rateRange;
+  var range = document.getElementById('rateRange').defaultValue;
+  document.getElementById('liveValue').innerHTML = rateRange;
 }
 
-function displayRate(rateRange){
-    document.getElementById("liveValue").innerHTML = rateRange;
+function displayRate(rateRange) {
+  document.getElementById('liveValue').innerHTML = rateRange;
 }

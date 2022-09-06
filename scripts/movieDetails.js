@@ -1,24 +1,22 @@
 'use strict';
 
-
 const params = new URLSearchParams(location.search);
 const movieId = params.get('movieId');
 
 function fetchData() {
   fetch(`http://localhost:3000/movies/${movieId}`)
- 
-  .then(response =>{ 
-    if(!response.ok) {
-      throw Error("ERROR")
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    
-    document.title = `${data.title} - Details`;
+    .then((response) => {
+      if (!response.ok) {
+        throw Error('ERROR');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
 
-    const detailsPage = `
+      document.title = `${data.title} - Details`;
+
+      const detailsPage = `
     <div class="movie ">
       <div class="header">
       <div>
@@ -58,41 +56,38 @@ function fetchData() {
       
 
       </div>
-    `
-    
-    document
-    .querySelector('#app').insertAdjacentHTML("afterbegin", detailsPage)
+    `;
 
-  }).catch(error => {
-    console.log(error)
-  })
-
-
-};
+      document
+        .querySelector('#app')
+        .insertAdjacentHTML('afterbegin', detailsPage);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 function random() {
-  const randomId = Math.floor(Math.random() * 996)
-  window.location=`movieDetails.html?movieId=${randomId}`
-};
+  const randomId = Math.floor(Math.random() * 996);
+  window.location = `movieDetails.html?movieId=${randomId}`;
+}
 
-function moveToEditMovie(){
-  window.location=`editMovie.html?movieId=${movieId}`
-};
+function moveToEditMovie() {
+  window.location = `editMovie.html?movieId=${movieId}`;
+}
 
-
-function deleteMovie(e){
-  if (confirm("Are you sure you want to delete the movie?") == true){
+function deleteMovie(e) {
+  if (confirm('Are you sure you want to delete the movie?') == true) {
     fetch(`http://localhost:3000/movies/${movieId}`, {
-    method: 'DELETE'
-  })
-  window.location="index.html";
-  e.preventDefault()}
-};
-
+      method: 'DELETE',
+    });
+    window.location = 'index.html';
+    e.preventDefault();
+  }
+}
 
 function homePage() {
-  window.location = "index.html"
-};
+  window.location = 'index.html';
+}
 
-fetchData()
-
+fetchData();

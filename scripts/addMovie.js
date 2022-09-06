@@ -1,5 +1,4 @@
-
-function handleAddMovie(e){
+function handleAddMovie(e) {
   e.preventDefault();
 
   const title = document.querySelector('[data-title-input]').value;
@@ -11,16 +10,12 @@ function handleAddMovie(e){
   const director = document.querySelector('[data-director-input]').value;
   const actors = document.querySelector('[data-actors-input]').value;
 
-
-
-
-  fetch('http://localhost:3000/movies',{
-  method: 'POST',
-  headers: {
+  fetch('http://localhost:3000/movies', {
+    method: 'POST',
+    headers: {
       'Content-type': 'application/json',
-  },
-  body: JSON.stringify({
-      
+    },
+    body: JSON.stringify({
       title,
       year,
       poster,
@@ -29,25 +24,26 @@ function handleAddMovie(e){
       director,
       actors,
       plot,
+    }),
   })
+    .then((res) => res.json())
+    .then(console.log);
 
-  }).then((res)=> res.json())
-    .then(console.log)
-
-  window.location = "index.html"
+  window.location = 'index.html';
 }
-document.querySelector('[data-add-form]').addEventListener('submit', handleAddMovie)
+document
+  .querySelector('[data-add-form]')
+  .addEventListener('submit', handleAddMovie);
 
-function homePage(){
-  window.location ="index.html"
+function homePage() {
+  window.location = 'index.html';
 }
 
 function liveRange() {
-  var range = document.getElementById("rateRange").defaultValue;
-  document.getElementById("liveValue").innerHTML = rateRange;
+  var range = document.getElementById('rateRange').defaultValue;
+  document.getElementById('liveValue').innerHTML = rateRange;
 }
 
-function displayRate(rateRange){
-    document.getElementById("liveValue").innerHTML = rateRange;
+function displayRate(rateRange) {
+  document.getElementById('liveValue').innerHTML = rateRange;
 }
-

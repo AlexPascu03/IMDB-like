@@ -1,59 +1,56 @@
 'use strict';
 
+const apiUrl = 'http://localhost:3000/movies';
 
-const apiUrl = "http://localhost:3000/movies";
-
-console.log(apiUrl)
+console.log(apiUrl);
 
 const params = new URLSearchParams(location.search);
 const page = params.get('page') ?? 1;
 function fetchData() {
   fetch(`http://localhost:3000/movies?_page=${page}`)
-  
-  .then(response =>{ 
-    if(!response.ok) {
-      throw Error("ERROR")
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
+    .then((response) => {
+      if (!response.ok) {
+        throw Error('ERROR');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
 
-    const mainPage = data.map(movie => {
-      return `
+      const mainPage = data
+        .map((movie) => {
+          return `
       <div onclick="detailsPage('${movie.id}')" class="movie">
         <div class="poster-image"><img src='${movie.poster}'></img></div>
         <p> ${movie.title}</P>
         </div>
-      `
+      `;
+        })
+        .join('');
 
-    }).join('')
-
-    
-    document
-    .querySelector('#app').insertAdjacentHTML("afterbegin", mainPage)
-
-  }).catch(error => {
-    console.log(error)
-  })
-
+      document.querySelector('#app').insertAdjacentHTML('afterbegin', mainPage);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
-fetchData()
+fetchData();
 
-function moveToAddMovie(){
-  window.location="addMovie.html"
+function moveToAddMovie() {
+  window.location = 'addMovie.html';
 }
 
 function detailsPage(movieId) {
-  console.log(movieId)
-  window.location=`movieDetails.html?movieId=${movieId}`
+  console.log(movieId);
+  window.location = `movieDetails.html?movieId=${movieId}`;
 }
 
 function homePage() {
-  window.location = "index.html"
+  window.location = 'index.html';
 }
 
 // Search
+
 function searchInput(){
 const movies = [];
 console.log(movies)
@@ -133,6 +130,6 @@ function createSeparator() {
 //Random
 
 function random() {
-  const randomId = Math.floor(Math.random() * 996)
-  window.location=`movieDetails.html?movieId=${randomId}`
+  const randomId = Math.floor(Math.random() * 996);
+  window.location = `movieDetails.html?movieId=${randomId}`;
 }
